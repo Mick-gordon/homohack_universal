@@ -1095,7 +1095,7 @@ do
     function Funcs:AddToggle(Idx, Info)
         local Toggle = {
             Value = Info.Default or false;
-            Type = 'Toggle';,
+            Type = 'Toggle';
             CallBack = Info.CallBack or function() end;
         };
 
@@ -1176,8 +1176,8 @@ do
 
         function Toggle:SetValue(Bool)
             Toggle.Value = Bool;
+            Toggle.CallBack(Bool);
             Toggle:Display();    
-             pcall(Toggle.CallBack, Toggle.Value);
             
             if Toggle.Changed then
                 Toggle.Changed();
@@ -1188,6 +1188,7 @@ do
             if Input.UserInputType == Enum.UserInputType.MouseButton1 and not Library:MouseIsOverOpenedFrame() then
                 Toggle.Value = not Toggle.Value;
                 Toggle:Display();
+                Toggle.CallBack(Toggle.Value);
 
                 if Toggle.Changed then
                     Toggle.Changed();
