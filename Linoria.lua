@@ -1095,7 +1095,8 @@ do
     function Funcs:AddToggle(Idx, Info)
         local Toggle = {
             Value = Info.Default or false;
-            Type = 'Toggle';
+            Type = 'Toggle';,
+            CallBack = Info.CallBack or function() end;
         };
 
         local Groupbox = self;
@@ -1179,6 +1180,7 @@ do
 
             if Toggle.Changed then
                 Toggle.Changed();
+                pcall(Toggle.CallBack, Toggle.Value);
             end;
         end;
 
