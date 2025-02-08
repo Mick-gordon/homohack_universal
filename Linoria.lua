@@ -1176,11 +1176,11 @@ do
 
         function Toggle:SetValue(Bool)
             Toggle.Value = Bool;
-            Toggle:Display();
-
+            Toggle:Display();    
+             pcall(Toggle.CallBack, Toggle.Value);
+            
             if Toggle.Changed then
                 Toggle.Changed();
-                pcall(Toggle.CallBack, Toggle.Value);
             end;
         end;
 
